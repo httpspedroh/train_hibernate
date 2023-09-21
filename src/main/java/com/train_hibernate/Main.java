@@ -73,7 +73,7 @@ public class Main {
                     // Insert contact
                     DbOp.insertContact(contact);
 
-                    System.out.println("\n> Contato inserido com sucesso!\n");
+                    System.out.println("\n> Contato inserido com sucesso!");
 
                     // ------------ //
 
@@ -92,7 +92,7 @@ public class Main {
 
                     DbOp.insertContact(contact_random);
 
-                    System.out.println("\n> Contato inserido com sucesso!\n");
+                    System.out.println("\n> Contato inserido com sucesso!");
                 
                     // ------------ //
 
