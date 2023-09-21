@@ -1,5 +1,5 @@
-com/train_hibernate/utils/DbOp.class
-com/train_hibernate/utils/HibernateUtil.class
-com/train_hibernate/Constants.class
-com/train_hibernate/Contact.class
-com/train_hibernate/Main.class
+com\train_hibernate\Main.class
+com\train_hibernate\utils\DbOp.class
+com\train_hibernate\Contact.class
+com\train_hibernate\Constants.class
+com\train_hibernate\utils\HibernateUtil.class

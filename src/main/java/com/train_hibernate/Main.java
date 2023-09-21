@@ -8,6 +8,7 @@ import com.train_hibernate.utils.DbOp;
 // Import Java classes
 import java.util.List;
 import java.util.Scanner;
+
 // ----------------------------------------------------------------------------------------------------- //
 
 public class Main {
@@ -15,8 +16,6 @@ public class Main {
     // ---------------------------------------------- //
 
     public static void main(String[] args) {
-
-        System.out.println("\n> Iniciando programa, aguarde...\n");
 
         // Start database
         DbOp.init();
@@ -231,6 +230,8 @@ public class Main {
             System.out.print("> Digite o nome do contato: ");
             name = scr.nextLine();
 
+            System.out.println("DEBUG: " + name);
+
             if (name.length() < 3 || name.length() > 50 || name == null) {
 
                 System.out.println("\nx O nome deve ter entre 3 e 50 caracteres!\n");
@@ -272,7 +273,7 @@ public class Main {
 
         do {
 
-            System.out.print("> Digite o telefone do contato no formato (xx) xxxxx-xxxx:");
+            System.out.print("> Digite o telefone do contato no formato (xx) xxxxx-xxxx: ");
             phone = scr.nextLine();
 
             // Validate phone in format (xx) xxxxx-xxxx
