@@ -4,8 +4,9 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 
 <hibernate-configuration>
-    <session-factory>
 
+    <session-factory>
+    
         <!-- Database Connection Settings -->
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://mysql834.umbler.com:41890/es2coreu</property>
@@ -19,5 +20,8 @@
 
         <!-- Mapping With Model Class Containing Annotations -->
         <mapping class="com.train_hibernate.Contact" />
+        <mapping class="com.train_hibernate.Appointment" />
+        <mapping class="com.train_hibernate.fk.ContactAppointment" />
     </session-factory>
+
 </hibernate-configuration>

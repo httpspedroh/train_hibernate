@@ -1,5 +1,8 @@
-C:\Users\lopes\My Drive\Student\PUC Minas\5th period\ES 2\train_hibernate\src\main\java\com\train_hibernate\Constants.java
-C:\Users\lopes\My Drive\Student\PUC Minas\5th period\ES 2\train_hibernate\src\main\java\com\train_hibernate\utils\DbOp.java
-C:\Users\lopes\My Drive\Student\PUC Minas\5th period\ES 2\train_hibernate\src\main\java\com\train_hibernate\Contact.java
-C:\Users\lopes\My Drive\Student\PUC Minas\5th period\ES 2\train_hibernate\src\main\java\com\train_hibernate\utils\HibernateUtil.java
-C:\Users\lopes\My Drive\Student\PUC Minas\5th period\ES 2\train_hibernate\src\main\java\com\train_hibernate\Main.java
+/mnt/c/Users/lopes/My Drive/Student/PUC Minas/5th period/ES 2/train_hibernate/src/main/java/com/train_hibernate/Main.java
+/mnt/c/Users/lopes/My Drive/Student/PUC Minas/5th period/ES 2/train_hibernate/src/main/java/com/train_hibernate/utils/DbOp.java
+/mnt/c/Users/lopes/My Drive/Student/PUC Minas/5th period/ES 2/train_hibernate/src/main/java/com/train_hibernate/fk/ContactAppointmentId.java
+/mnt/c/Users/lopes/My Drive/Student/PUC Minas/5th period/ES 2/train_hibernate/src/main/java/com/train_hibernate/utils/HibernateUtil.java
+/mnt/c/Users/lopes/My Drive/Student/PUC Minas/5th period/ES 2/train_hibernate/src/main/java/com/train_hibernate/fk/ContactAppointment.java
+/mnt/c/Users/lopes/My Drive/Student/PUC Minas/5th period/ES 2/train_hibernate/src/main/java/com/train_hibernate/Appointment.java
+/mnt/c/Users/lopes/My Drive/Student/PUC Minas/5th period/ES 2/train_hibernate/src/main/java/com/train_hibernate/Constants.java
+/mnt/c/Users/lopes/My Drive/Student/PUC Minas/5th period/ES 2/train_hibernate/src/main/java/com/train_hibernate/Contact.java

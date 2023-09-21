@@ -1,5 +1,8 @@
-com\train_hibernate\Main.class
-com\train_hibernate\utils\DbOp.class
-com\train_hibernate\Contact.class
-com\train_hibernate\Constants.class
-com\train_hibernate\utils\HibernateUtil.class
+com/train_hibernate/utils/DbOp.class
+com/train_hibernate/fk/ContactAppointmentId.class
+com/train_hibernate/utils/HibernateUtil.class
+com/train_hibernate/Constants.class
+com/train_hibernate/Contact.class
+com/train_hibernate/Main.class
+com/train_hibernate/Appointment.class
+com/train_hibernate/fk/ContactAppointment.class
