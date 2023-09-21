@@ -272,7 +272,7 @@ public class Main {
 
         do {
 
-            System.out.print("> Digite o telefone do contato: ");
+            System.out.print("> Digite o telefone do contato no formato (xx) xxxxx-xxxx:");
             phone = scr.nextLine();
 
             // Validate phone in format (xx) xxxxx-xxxx
