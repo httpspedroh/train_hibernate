@@ -4,7 +4,6 @@ package com.train_hibernate;
 
 // Import native classes
 import com.train_hibernate.utils.DbOp;
-import com.train_hibernate.utils.HibernateUtil;
 import com.train_hibernate.fk.ContactAppointment;
 
 // Import Java classes
