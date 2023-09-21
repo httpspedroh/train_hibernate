@@ -2,8 +2,9 @@ package com.train_hibernate.utils;
 
 // ----------------------------------------------------------------------------------------------------- //
 
-// Import Contact
+// Import native classes
 import com.train_hibernate.Contact;
+import com.train_hibernate.Constants;
 
 // Import Java classes
 import java.util.ArrayList;
@@ -15,70 +16,62 @@ import org.apache.logging.log4j.LogManager;
 
 // Import hibernate classes
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 // ----------------------------------------------------------------------------------------------------- //
 
 public class DbOp {
 
-	static Session sessionObj;
-	static SessionFactory sessionFactoryObj;
-
+	static Session session = null;
 	public final static Logger logger = LogManager.getLogger(DbOp.class);
 
-    // ---------------------------------------------- //
+	// ---------------------------------------------- //
 
-	private static SessionFactory buildSessionFactory() {
+	public static void init() {
 
-		Configuration configObj = new Configuration();
-		configObj.configure("hibernate.cfg.xml");
+		try {
 
-		ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build(); 
-
-		sessionFactoryObj = configObj.buildSessionFactory(serviceRegistryObj);
-		return sessionFactoryObj;
+			// Start session and transaction
+			session = HibernateUtil.getSession();
+			session.beginTransaction();
+		}
+		catch (Exception e) { logger.error("Error starting database: " + e.getMessage()); }
 	}
 
     // ---------------------------------------------- //
 
-    public static void createContact() {
-
-        Contact contact = null;
-
+	public static void insertContact(Contact contact) {
+		
+        Transaction transaction = null;
+		  
         try {
-			
-            sessionObj = buildSessionFactory().openSession();
-			sessionObj.beginTransaction();
 
-		    for(int j = 101; j <= 105; j++) {
+			// Start session and transaction
+			session = HibernateUtil.getSession();
+			transaction = session.beginTransaction();
+            
+			// Save the student object
+            session.persist(contact);
+            
+			// Commit transaction
+            transaction.commit();
 
-				contact = new Contact();
-				contact.setAddress("Avenida Dom José Gaspar, 500");
-				contact.setName("Aluno " + j);
-				contact.setPhone("(31) 99999-8877");
+        } catch (Exception e) {
+
+            // In case of any exception, rollback the transaction
+			if (transaction != null) { 
+				
+				logger.error("\n[x] Transaction is being rolled back.\n");
+				transaction.rollback();
 			}
+            
+            logger.info("Error: " + e.getMessage());
 
-			sessionObj.getTransaction().commit();
-			logger.info("\nSuccessfully created 5 records in the database!\n");
+        } finally {
 
-		} catch(Exception sqlException) {
-
-			if(null != sessionObj.getTransaction()) {
-
-				logger.info("\n.......Transaction Is Being Rolled Back.......\n");
-				sessionObj.getTransaction().rollback();
-			}
-
-			sqlException.printStackTrace();
-
-		} finally {
-
-			if(sessionObj != null) sessionObj.close();
-		}
+            if (session != null) session.close();
+        }
     }
 
     // ---------------------------------------------- //
@@ -89,26 +82,26 @@ public class DbOp {
 
 		try {
 
-			sessionObj = buildSessionFactory().openSession();
-			sessionObj.beginTransaction();
-
-			Query<Contact> queryObj = sessionObj.createQuery("FROM Contact", Contact.class);
-
+			// Start session and transaction
+			session = HibernateUtil.getSession();
+			session.beginTransaction();
+            
+			Query<Contact> queryObj = session.createQuery("FROM " + Constants.CONTACTS_ENTITY_NAME, Contact.class);
 			contacts = queryObj.list();
 
 		} catch(Exception sqlException) {
 
-			if(null != sessionObj.getTransaction()) {
+			if(null != session.getTransaction()) {
 
-				logger.info("\n.......Transaction Is Being Rolled Back.......\n");
-				sessionObj.getTransaction().rollback();
+				logger.error("\n[x] Transaction is being rolled back.\n");
+				session.getTransaction().rollback();
 			}
 
 			sqlException.printStackTrace();
 
 		} finally {
 
-			if(sessionObj != null) sessionObj.close();
+			if(session != null) session.close();
 		}
 
 		return contacts;
@@ -116,66 +109,95 @@ public class DbOp {
 
 	// ---------------------------------------------- //
 
-	public static void updateRecord(int contactId) {
+	public static void updateContact(Contact contact) {
 
 		try {
 
-			sessionObj = buildSessionFactory().openSession();
-			sessionObj.beginTransaction();
+			// Start session and transaction
+			session = HibernateUtil.getSession();
+			session.beginTransaction();
+			
+			session.merge(contact);
 
-			Contact contact = (Contact) sessionObj.get(Contact.class, contactId);
-			contact.setName("Aluno 9");
-			contact.setAddress("Avenida Dom Lúcio Antunes, 200");
-			contact.setPhone("(31) 98975-8877");
-
-			sessionObj.getTransaction().commit();
-			logger.info("\nContact With Id?= " + contactId + " Is Successfully Updated In The Database!\n");
+			// Commit transaction
+			session.getTransaction().commit();
 
 		} catch(Exception sqlException) {
 
-			if(null != sessionObj.getTransaction()) {
+			if(null != session.getTransaction()) {
 
-				logger.info("\n.......Transaction Is Being Rolled Back.......\n");
-				sessionObj.getTransaction().rollback();
+				logger.error("\n[x] Transaction is being rolled back.\n");
+				session.getTransaction().rollback();
 			}
 
 			sqlException.printStackTrace();
 
 		} finally {
 
-			if(sessionObj != null) sessionObj.close();
+			if(session != null) session.close();
 		}
 	}
 
 	// ---------------------------------------------- //
 
-	public static void deleteRecord(int contactId) {
+	public static void deleteContact(Contact contact) {
 
 		try {
 
-			sessionObj = buildSessionFactory().openSession();
-			sessionObj.beginTransaction();
+			// Start session and transaction
+			session = HibernateUtil.getSession();
+			session.beginTransaction();
+			
+			session.remove(contact);
 
-			Contact contact = sessionObj.get(Contact.class, contactId);
-			sessionObj.remove(contact);
-
-			sessionObj.getTransaction().commit();
-			logger.info("\nContact With Id?= " + contactId + " Is Successfully Deleted From The Database!\n");
+			// Commit transaction
+			session.getTransaction().commit();
 
 		} catch(Exception sqlException) {
 
-			if(null != sessionObj.getTransaction()) {
+			if(null != session.getTransaction()) {
 
-				logger.info("\n.......Transaction Is Being Rolled Back.......\n");
-				sessionObj.getTransaction().rollback();
+				logger.error("\n[x] Transaction is being rolled back.\n");
+				session.getTransaction().rollback();
 			}
 
 			sqlException.printStackTrace();
 
 		} finally {
 
-			if(sessionObj != null) sessionObj.close();
+			if(session != null) session.close();
 		}
+	}
+
+	// ---------------------------------------------- //
+
+	public static Contact getContactById(int contactId) {
+
+		Contact contact = null;
+
+		try {
+
+			// Start session and transaction
+			session = HibernateUtil.getSession();
+			session.beginTransaction();
+			
+			contact = session.get(Contact.class, contactId);
+
+		} catch(Exception sqlException) {
+
+			if(null != session.getTransaction()) {
+
+				logger.error("\n[x] Transaction is being rolled back.\n");
+				session.getTransaction().rollback();
+			}
+
+			sqlException.printStackTrace();
+
+		} finally {
+
+			if(session != null) session.close();
+		}
+		return contact;
 	}
 
 	// ---------------------------------------------- //
