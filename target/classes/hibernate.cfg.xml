@@ -11,6 +11,7 @@
         <property name="hibernate.connection.url">jdbc:mysql://mysql834.umbler.com:41890/es2coreu</property>
         <property name="hibernate.connection.username">alunocoreu</property>
         <property name="hibernate.connection.password">pucminas</property>
+        <property name="hibernate.connection.characterEncoding">UTF-8</property>
         <property name="show_sql">false</property>
 
         <!-- Specifying Session Context -->
