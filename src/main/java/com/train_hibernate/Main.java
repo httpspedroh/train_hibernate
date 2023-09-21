@@ -278,7 +278,7 @@ public class Main {
             // Validate phone in format (xx) xxxxx-xxxx
             if (phone.length() != 15) {
 
-                System.out.println("\nx O telefone deve ter 15 caracteres!\n");
+                System.out.println("\nx O telefone deve estar no formato (xx) xxxxx-xxxx!\n");
                 valid = false;
             }
             else {
